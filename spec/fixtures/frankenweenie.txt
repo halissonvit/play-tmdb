@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 23 Aug 2010 16:42:39 GMT
+Content-Type: text/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=20
+Status: 200 OK
+Cache-Control: public, max-age=21600
+X-Varnish: 2542116501
+Age: 0
+Via: 1.1 varnish
+X-Cache: MISS
+
+{"page":1,"results":[{"backdrop_path":"/L4SsHfdYkuFNgpjYj8ByjJRAcI.jpg","id":62214,"original_title":"Frankenweenie","release_date":"2012-10-05","popularity":1.686,"poster_path":"/sn5V6z2RRKujHGthAGjdl3Evzj0.jpg","title":"Frankenweenie"},{"backdrop_path":"/Ae2mNjaNPmtvkiorYO9MVY9prdg.jpg","id":33914,"original_title":"Frankenweenie","release_date":"1984-12-14","popularity":0.08,"poster_path":"/gGK2SZX2kExXg4y97FlZ4pvekCz.jpg","title":"Frankenweenie"}],"total_pages":1,"total_results":2}

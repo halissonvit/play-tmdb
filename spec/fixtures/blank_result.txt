@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 23 Aug 2010 16:46:40 GMT
+Content-Type: text/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=20
+Status: 200 OK
+Cache-Control: public, max-age=21600
+X-Varnish: 2542133049
+Age: 0
+Via: 1.1 varnish
+X-Cache: MISS
+
+["Nothing found."]
