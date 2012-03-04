@@ -1,20 +1,36 @@
+require 'net/http'
+require 'uri'
+require 'cgi'
+require 'json'
+require 'deepopenstruct'
+require "addressable/uri"
+
 module Play
   module Tmdb
     class Base
-      require 'net/http'
-      require 'uri'
-      require 'cgi'
-      require 'json'
-      require 'deepopenstruct'
-      require "addressable/uri"
-
       def self.default_options
-        {api_key: "",
-         language: "en"}
+        {
+            api_key: "",
+            language: "en"
+        }
       end
 
       @@options = Tmdb::Base.default_options
       @@base_url = "http://api.themoviedb.org/3/"
+
+      # Injecting accessors to each @@options key
+
+      class_eval "default_options.each do |k,v|
+        class_eval\"
+          def self.\#{k}=(\#{k})
+            @@options[:\#{k}]=\#{k}
+          end
+
+          def self.\#{k}
+            @@options[:\#{k}]
+          end
+        \"
+      end"
 
       def self.options=(options)
         @@options=options
@@ -26,22 +42,6 @@ module Play
 
       def self.base_url
         @@base_url
-      end
-
-      def self.api_key
-        @@options[:api_key]
-      end
-
-      def self.api_key=(api_key)
-        @@options[:api_key]=api_key
-      end
-
-      def self.language
-        @@options[:language]
-      end
-
-      def self.language=(language)
-        @@options[:language]=language
       end
 
       # Get a URL and return a response object, follow upto 'limit' re-directs on the way
@@ -61,6 +61,25 @@ module Play
           else
             Net::HTTPBadRequest.new('404', 404, "Not Found")
         end
+      end
+
+      def self.api_call(method, params = {})
+        raise ArgumentError.new("api method is required") if method.empty?
+
+        url = build_api_url(method, params)
+        response = Play::Tmdb::Base.get_url(url)
+
+        body = JSON(response.body)
+        OpenStruct.new body
+      end
+
+      private
+      def self.build_api_url(method, params)
+        base_url + method + "?" + build_params_of_url(params)
+      end
+
+      def self.build_params_of_url(params)
+        options.merge(params).collect { |key, value| "#{key}=#{value}" }.join("&")
       end
     end
   end
