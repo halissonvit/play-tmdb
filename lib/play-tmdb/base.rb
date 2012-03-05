@@ -80,7 +80,7 @@ module Play
         end
         puts "build_json: #{time} seconds"
         time = Benchmark.realtime do
-          @object = OpenStruct.new body
+          @object = OpenStruct.new @body
         end
         puts "build_object: #{time} seconds"
 
