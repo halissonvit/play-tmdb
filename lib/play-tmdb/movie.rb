@@ -32,12 +32,11 @@ module Play
         raise ArgumentError.new("valid id is required") if params[:id].to_s.empty?
 
 
+        puts "----------------------------------------------------------------------------"
         time = Benchmark.realtime do
           @info = Play::Tmdb::Base.api_call("movie/#{params[:id]}", params)
         end
-
-        puts "----------------------------------------------------------------------------"
-        puts "Movie.info: #{time} seconds"
+        puts "Movie.info.total: #{time} seconds"
         puts "----------------------------------------------------------------------------"
 
         time = Benchmark.realtime do
@@ -46,8 +45,7 @@ module Play
           @info.backdrops = @images.backdrops
         end
 
-        puts "----------------------------------------------------------------------------"
-        puts "Movie.images: #{time} seconds"
+        puts "Movie.images.total: #{time} seconds"
         puts "----------------------------------------------------------------------------"
 
         @info
