@@ -31,12 +31,26 @@ module Play
       def self.info(params={id: ""})
         raise ArgumentError.new("valid id is required") if params[:id].to_s.empty?
 
-        info = Play::Tmdb::Base.api_call("movie/#{params[:id]}", params)
-        images = images(params)
-        info.posters = images.posters
-        info.backdrops = images.backdrops
 
-        info
+        time = Benchmark.realtime do
+          @info = Play::Tmdb::Base.api_call("movie/#{params[:id]}", params)
+        end
+
+        puts "----------------------------------------------------------------------------"
+        puts "Movie.info: #{time} seconds"
+        puts "----------------------------------------------------------------------------"
+
+        time = Benchmark.realtime do
+          @images = images(params)
+          @info.posters = @images.posters
+          @info.backdrops = @images.backdrops
+        end
+
+        puts "----------------------------------------------------------------------------"
+        puts "Movie.images: #{time} seconds"
+        puts "----------------------------------------------------------------------------"
+
+        @info
       end
 
       def self.images(params={id: ""})

@@ -1,4 +1,5 @@
 require "spec_helper"
+require "benchmark"
 
 describe "Play::Tmdb::Movie" do
   context "search" do
