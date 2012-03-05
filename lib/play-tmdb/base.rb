@@ -68,24 +68,10 @@ module Play
         raise ArgumentError.new("api method is required") if method.empty?
 
         url = build_api_url(method, params)
+        response = Play::Tmdb::Base.get_url(url)
 
-        get_url_time = Benchmark.realtime do
-          @response = Play::Tmdb::Base.get_url(url).body
-        end
-        puts "request: #{get_url_time * 1000} milliseconds"
-
-        json_time = Benchmark.realtime do
-          parser = Yajl::Parser.new
-          @body = parser.parse(@response)
-        end
-        puts "build_json: #{json_time * 1000} milliseconds"
-
-        load_time = Benchmark.realtime do
-          @object = DeepOpenStruct.load @body
-        end
-        puts "build_object: #{load_time * 1000} milliseconds"
-
-        @object
+        body = Yajl::Parser.new.parse(response.body)
+        OpenStruct.new body
       end
 
       private

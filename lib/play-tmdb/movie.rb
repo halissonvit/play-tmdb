@@ -22,7 +22,7 @@ module Play
         body = Play::Tmdb::Base.api_call("search/movie", params)
 
         results = body.results.map do |r|
-          new(r, false)
+          new(r)
         end
 
         results
@@ -30,37 +30,22 @@ module Play
 
       def self.info(params={id: ""})
         raise ArgumentError.new("valid id is required") if params[:id].to_s.empty?
-        puts "----------------------------------------------------------------------------"
 
-        @info = Play::Tmdb::Base.api_call("movie/#{params[:id]}", params)
+        info = Play::Tmdb::Base.api_call("movie/#{params[:id]}", params)
+        images = images(params)
+        info.posters = images.posters
+        info.backdrops = images.backdrops
 
-        total_time = Benchmark.realtime do
-          @images = images(params)
-          @info.posters = @images.posters
-          @info.backdrops = @images.backdrops
-        end
-        puts "Movie.info.total: #{total_time * 1000} milliseconds"
-
-        @info
+        info
       end
 
       def self.images(params={id: ""})
         raise ArgumentError.new("valid id is required") if params[:id].to_s.empty?
-        puts "----------------------------------------------------------------------------"
-        total_time = Benchmark.realtime do
-          @body = Play::Tmdb::Base.api_call("movie/#{params[:id]}/images", params.keep_if { |k, v| k!=:id })
-          p_time = Benchmark.realtime do
-            @body.posters = @body.posters.collect { |poster| OpenStruct.new(poster) }
-          end
-          puts "Movie.images.posters.build.total: #{p_time * 1000} milliseconds"
 
-          bd_time = Benchmark.realtime do
-            @body.backdrops = @body.backdrops.collect { |backdrop| OpenStruct.new(backdrop) }
-          end
-          puts "Movie.images.backdrops.build.total: #{bd_time * 1000} milliseconds"
-        end
-        puts "Movie.images.total: #{total_time*1000} milliseconds"
-        @body
+        body = Play::Tmdb::Base.api_call("movie/#{params[:id]}/images", params.keep_if { |k, v| k!=:id })
+        body.posters = body.posters.collect { |poster| OpenStruct.new(poster) }
+        body.backdrops = body.backdrops.collect { |backdrop| OpenStruct.new(backdrop) }
+        body
       end
     end
   end
