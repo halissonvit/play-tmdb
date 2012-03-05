@@ -1,18 +1,6 @@
 require "spec_helper"
 
 describe "Play::Tmdb::Base" do
-  def clapper_com_response
-    File.open(File.join(File.dirname(__FILE__), "../..", "fixtures", "example_com.txt"))
-  end
-
-  def incorrect_api_url_response
-    File.open(File.join(File.dirname(__FILE__), "../..", "fixtures", "incorrect_api_url.txt"))
-  end
-
-  def empty_result_response
-    File.open(File.join(File.dirname(__FILE__), "../..", "fixtures", "blank_result.txt"))
-  end
-
   before :each do
     Play::Tmdb::Base.options=Play::Tmdb::Base.default_options
   end
@@ -45,9 +33,8 @@ describe "Play::Tmdb::Base" do
 
   describe "get url" do
     before :each do
-      stub_request(:get, "http://www.clapper.com.br/").to_return(File.open(File.join(clapper_com_response)))
-
-      stub_request(:get, "http://www.noasdoansdonaosdnoad.com.br/").to_return(File.open(File.join(incorrect_api_url_response)))
+      mock_site_request
+      mock_invalid_site_request
     end
 
     it "that is valid returns a response object with code 200" do
@@ -65,7 +52,7 @@ describe "Play::Tmdb::Base" do
     before :each do
       @api_key="tt"
       @language="en"
-      @params = {query: "filme_bom"}
+      @params = {query: "frankenweenie"}
       @method = "search/movie"
       Play::Tmdb::Base.api_key=@api_key
       Play::Tmdb::Base.language=@language
@@ -78,10 +65,10 @@ describe "Play::Tmdb::Base" do
     end
 
     it "mount query with params" do
+      @request = mock_search_movies
       url = "#{Play::Tmdb::Base.base_url}#{@method}?api_key=#{@api_key}&language=#{@language}&query=#{@params[:query]}"
-      request = stub_request(:get, url).to_return(empty_result_response)
       Play::Tmdb::Base.api_call(@method, @params)
-      request.should have_been_made.times(1)
+      @request.should have_been_made.times(1)
     end
   end
 

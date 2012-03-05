@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 23 Aug 2010 16:45:21 GMT
+Content-Type: text/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=20
+Status: 200 OK
+Cache-Control: public, max-age=21600
+X-Varnish: 2542127928 2542059531
+Age: 1000
+Via: 1.1 varnish
+X-Cache: HIT
+
+{"images":{"base_url":"http://cf2.imgobject.com/t/p/","poster_sizes":["w92","w154","w185","w342","w500","original"],"backdrop_sizes":["w300","w780","w1280","original"],"profile_sizes":["w45","w185","h632","original"]}}

@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 23 Aug 2010 16:46:40 GMT
+Content-Type: text/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=20
+Status: 200 OK
+Cache-Control: public, max-age=21600
+X-Varnish: 2542133049
+Age: 0
+Via: 1.1 varnish
+X-Cache: MISS
+
+{"id":11,"backdrops":[{"file_path":"/dgRJ0xUeBhdJE9ouySdoydj7P8l.jpg","width":1920,"height":1200,"iso_639_1":"fr","aspect_ratio":1.6,"vote_average":0.5,"vote_count":1}],"posters":[{"file_path":"/3k9Q3LkmkxLNBXDsskbUeJwqDlq.jpg","width":700,"height":933,"iso_639_1":"fr","aspect_ratio":0.75,"vote_average":1.8571428571428572,"vote_count":7},{"file_path":"/mdUCwvmtVGus3k82oZmDsTwc4jh.jpg","width":1200,"height":1500,"iso_639_1":"fr","aspect_ratio":0.8,"vote_average":0.5,"vote_count":1},{"file_path":"/hrQBhykK2syz3gBrY78USzIcZAY.jpg","width":700,"height":933,"iso_639_1":"fr","aspect_ratio":0.75,"vote_average":0.5,"vote_count":2},{"file_path":"/zs4lFwCF25Ykod7igGbiRWaqTJT.jpg","width":1824,"height":2568,"iso_639_1":"fr","aspect_ratio":0.71,"vote_average":0.0,"vote_count":0}]}
