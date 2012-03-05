@@ -4,6 +4,7 @@ require 'cgi'
 require 'json'
 require 'deepopenstruct'
 require "addressable/uri"
+require "yajl"
 
 module Play
   module Tmdb
@@ -69,13 +70,13 @@ module Play
         url = build_api_url(method, params)
 
         time = Benchmark.realtime do
-          @response = Play::Tmdb::Base.get_url(url)
+          @response = Play::Tmdb::Base.get_url(url).body
         end
         puts "request: #{time} seconds"
 
-
+        parser = Yajl::Parser.new
         time = Benchmark.realtime do
-          @body = JSON(@response.body)
+          @body = parser.parse(@response)
         end
         puts "build_json: #{time} seconds"
         time = Benchmark.realtime do
