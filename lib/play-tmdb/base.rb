@@ -69,20 +69,21 @@ module Play
 
         url = build_api_url(method, params)
 
-        time = Benchmark.realtime do
+        get_url_time = Benchmark.realtime do
           @response = Play::Tmdb::Base.get_url(url).body
         end
-        puts "request: #{time} seconds"
+        puts "request: #{get_url_time * 1000} milliseconds"
 
-        parser = Yajl::Parser.new
-        time = Benchmark.realtime do
+        json_time = Benchmark.realtime do
+          parser = Yajl::Parser.new
           @body = parser.parse(@response)
         end
-        puts "build_json: #{time} seconds"
-        time = Benchmark.realtime do
-          @object = OpenStruct.new @body
+        puts "build_json: #{json_time * 1000} milliseconds"
+
+        load_time = Benchmark.realtime do
+          @object = DeepOpenStruct.load @body
         end
-        puts "build_object: #{time} seconds"
+        puts "build_object: #{load_time * 1000} milliseconds"
 
         @object
       end
