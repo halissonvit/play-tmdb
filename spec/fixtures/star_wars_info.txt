@@ -1,0 +1,15 @@
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 23 Aug 2010 16:45:21 GMT
+Content-Type: text/json; charset=utf-8
+Transfer-Encoding: chunked
+Connection: keep-alive
+Keep-Alive: timeout=20
+Status: 200 OK
+Cache-Control: public, max-age=21600
+X-Varnish: 2542127928 2542059531
+Age: 1000
+Via: 1.1 varnish
+X-Cache: HIT
+
+{"adult":false,"backdrop_path":"/r0v9dayXd1IH5WPWFBWv52tGHkB.jpg","belongs_to_collection":{"id":10,"name":"Star Wars Collection","poster_path":"/fdmSovGcTO4qeYH4llwqDsYi5cB.jpg","backdrop_path":"/rgjAb1oUCzJk1U2WhtQt7gGu84U.jpg"},"budget":11000000,"genres":[{"id":28,"name":"Ação"},{"id":12,"name":"Aventura"},{"id":878,"name":"Ficção científica"},{"id":10751,"name":"Família"}],"homepage":"","id":11,"imdb_id":"tt0076759","original_title":"Star Wars: Episode IV - A New Hope","overview":"Os Cavaleiros Jedi foram exterminados e o Império governa a galáxia com punho de ferro. Um pequeno grupo de Rebeldes atreveu-se a dar resposta, roubando os planos secretos da mais temível e poderosa arma imperial, a estação de balhata Estrela da Morte. O mais fiel súbdito do Imperador, Darth Vader, deve encontrar os planos, e localizar a base Rebelde escondida. A Princesa Leia, uma líder Rebelde capturada, envia uma mensagem de ajuda, que é interceptada por um simples rapaz do campo, Luke Skywalker. Cumprindo o seu próprio destino, Luke aceita o desafio de salvar a Princesa e ajudar a Relelião a derrubar o Império, com a ajuda de aliados tão inesquecíveis como o sensato e experiente Obi-Wan Kenobi, o convencido Han Solo, o leal Chewbacca, e os andróides R2-D2 e C-3PO.","popularity":44177.125,"poster_path":"/tvSlBzAdRE29bZe5yYWrJ2ds137.jpg","production_companies":[{"name":"Lucasfilm","id":1}],"production_countries":[{"iso_3166_1":"TN","name":"Tunisia"},{"iso_3166_1":"US","name":"United States of America"}],"release_date":"1977-05-25","revenue":775398007,"runtime":0,"spoken_languages":[{"iso_639_1":"en","name":"English"}],"tagline":"","title":"Guerra nas Estrelas - Episódio IV - Uma Nova Esperança","vote_average":9.2,"vote_count":97}

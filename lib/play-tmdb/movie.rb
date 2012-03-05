@@ -6,7 +6,9 @@ module Play
         # (as determined by checking for the trailer property in the raw data)
 
         if (fetch_all_data)
-          #Call getInfo
+          expanded_data = info(id: raw_data["id"], language: language)
+          raise ArgumentError, "Unable to fetch expanded info for Movie ID: '#{raw_data["id"]}'" if expanded_data.nil?
+          raw_data = expanded_data.marshal_dump
         end
 
         DeepOpenStruct.load(raw_data)
@@ -20,10 +22,16 @@ module Play
         body = Play::Tmdb::Base.api_call("search/movie", params)
 
         results = body.results.map do |r|
-          new(r)
+          new(r, true)
         end
 
         results
+      end
+
+      def self.info(params={id: ""})
+        raise ArgumentError.new("valid id is required") if params[:id].to_s.empty?
+
+        body = Play::Tmdb::Base.api_call("movie/#{params[:id]}", params.keep_if { |k, v| k!=:id })
       end
     end
   end
