@@ -39,12 +39,12 @@ describe "Play::Tmdb::Base" do
 
     it "that is valid returns a response object with code 200" do
       test_response = Play::Tmdb::Base.get_url("http://www.clapper.com.br/")
-      test_response.code.to_i.should == 200
+      test_response.response_code.to_i.should == 200
     end
 
     it "that is nonexistent returns a response object with code 404" do
       test_response = Play::Tmdb::Base.get_url("http://www.noasdoansdonaosdnoad.com.br/")
-      test_response.code.to_i.should == 404
+      test_response.response_code.to_i.should == 404
     end
   end
 
@@ -74,13 +74,23 @@ describe "Play::Tmdb::Base" do
 
   context "@@options" do
     it "should inject setter" do
-      Play::Tmdb::Base.should respond_to(:language=)
-      Play::Tmdb::Base.should respond_to(:api_key=)
+      expect {
+        Play::Tmdb::Base.language="en"
+      }.should_not raise_error NoMethodError
+
+      expect {
+        Play::Tmdb::Base.api_key="tt"
+      }.should_not raise_error NoMethodError
     end
 
     it "should inject getter" do
-      Play::Tmdb::Base.should respond_to(:language)
-      Play::Tmdb::Base.should respond_to(:api_key)
+      expect {
+        Play::Tmdb::Base.language
+      }.should_not raise_error NoMethodError
+
+      expect {
+        Play::Tmdb::Base.api_key
+      }.should_not raise_error NoMethodError
     end
   end
 end

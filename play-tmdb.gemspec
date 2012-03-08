@@ -27,5 +27,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency(%q<json>, [">= 0"])
   s.add_runtime_dependency(%q<addressable>, [">= 0"])
   s.add_runtime_dependency(%q<yajl-ruby>, [">= 0"])
+  s.add_runtime_dependency(%q<curb>, [">= 0"])
   s.add_development_dependency(%q<webmock>, [">= 0"])
 end
